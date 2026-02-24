@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\TransactionController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/api/v1')->group(function () {
+Route::prefix('/v1')->group(function () {
     // User routes
     Route::post('/users', [UserController::class, 'store']);
     Route::get('/users/{user}', [UserController::class, 'show']);
