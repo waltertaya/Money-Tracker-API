@@ -50,4 +50,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // relationship
+    public function wallets()
+    {
+        return $this->hasMany(Wallet::class);
+    }
+
+    public function getOverallBalanceAttribute(): float
+    {
+        return $this->wallets->sum('balance');
+    }
 }

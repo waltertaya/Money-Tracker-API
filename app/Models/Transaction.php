@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
@@ -12,4 +13,18 @@ class Transaction extends Model
     public $incrementing = false;
 
     protected $keyType = 'string';
+
+    protected $fillable = [
+        'wallet_id',
+        'type',
+        'amount',
+        'description',
+        'date',
+    ];
+
+    // relationship
+    public function wallet(): BelongsTo
+    {
+        return $this->belongsTo(Wallet::class);
+    }
 }
