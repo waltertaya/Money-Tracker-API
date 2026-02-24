@@ -22,6 +22,14 @@ class Transaction extends Model
         'date',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'amount' => 'decimal:2',
+            'date' => 'date',
+        ];
+    }
+
     // relationship
     public function wallet(): BelongsTo
     {

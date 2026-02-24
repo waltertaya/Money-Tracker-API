@@ -34,9 +34,13 @@ class Wallet extends Model
     // calculate the wallet balance
     public function getBalanceAttribute(): float
     {
-        $income = $this->transactions()->where('type', 'income')->sum('amount');
-        $expense = $this->transactions()->where('type', 'expense')->sum('amount');
+        $transactions = $this->relationLoaded('transactions')
+            ? $this->transactions
+            : $this->transactions()->get(['type', 'amount']);
 
-        return $income - $expense;
+        $income = $transactions->where('type', 'income')->sum('amount');
+        $expense = $transactions->where('type', 'expense')->sum('amount');
+
+        return round((float) ($income - $expense), 2);
     }
 }

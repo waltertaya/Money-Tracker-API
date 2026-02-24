@@ -3,47 +3,77 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Wallet;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class WalletController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'user_id' => ['required', 'exists:users,id'],
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $wallet = Wallet::create($validated);
+
+        return response()->json([
+            'message' => 'Wallet created successfully.',
+            'data' => [
+                'id' => $wallet->id,
+                'user_id' => $wallet->user_id,
+                'name' => $wallet->name,
+                'balance' => $wallet->balance,
+                'created_at' => $wallet->created_at,
+            ],
+        ], 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show(Wallet $wallet): JsonResponse
     {
-        //
+        $wallet->load(['transactions' => function ($query) {
+            $query->orderByDesc('date')->orderByDesc('created_at');
+        }]);
+
+        return response()->json([
+            'wallet' => [
+                'id' => $wallet->id,
+                'user_id' => $wallet->user_id,
+                'name' => $wallet->name,
+                'balance' => $wallet->balance,
+                'created_at' => $wallet->created_at,
+            ],
+            'transactions' => $wallet->transactions,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, Wallet $wallet): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $wallet->update($validated);
+
+        return response()->json([
+            'message' => 'Wallet updated successfully.',
+            'data' => [
+                'id' => $wallet->id,
+                'user_id' => $wallet->user_id,
+                'name' => $wallet->name,
+                'balance' => $wallet->balance,
+                'updated_at' => $wallet->updated_at,
+            ],
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Wallet $wallet): JsonResponse
     {
-        //
-    }
+        $wallet->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json([
+            'message' => 'Wallet deleted successfully.',
+        ]);
     }
 }
