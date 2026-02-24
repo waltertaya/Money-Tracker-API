@@ -1,0 +1,88 @@
+### Money Tracker API - HTTP Requests
+
+@baseUrl = http://localhost:8000/api/v1
+@contentType = application/json
+
+### ============================================
+### USER ENDPOINTS
+### ============================================
+
+### Create a new user
+POST {{baseUrl}}/users
+Content-Type: {{contentType}}
+
+{
+  "name": "Walter Onyango",
+  "email": "walter.developer@tech.com",
+  "password": "password123"
+}
+
+### Get user profile with all wallets and overall balance
+# /users/{userId}
+GET {{baseUrl}}/users/019c9086-436e-70c2-9b74-a80340ce8484
+Content-Type: {{contentType}}
+
+### ============================================
+### WALLET ENDPOINTS
+### ============================================
+
+### Create a new wallet for a user
+POST {{baseUrl}}/wallets
+Content-Type: {{contentType}}
+
+{
+  "user_id": "019c9086-436e-70c2-9b74-a80340ce8484",
+  "name": "Personal Account"
+}
+
+### Get wallet details with balance and all transactions
+# /wallets/{walletId}
+GET {{baseUrl}}/wallets/019c9088-045e-7021-841f-55f2f538044c
+Content-Type: {{contentType}}
+
+### Update wallet name
+PUT {{baseUrl}}/wallets/019c9088-045e-7021-841f-55f2f538044c
+Content-Type: {{contentType}}
+
+{
+  "name": "Updated Business Account"
+}
+
+### Delete a wallet
+DELETE {{baseUrl}}/wallets/019c908b-678a-7224-817e-0903d22a2058
+Content-Type: {{contentType}}
+
+### ============================================
+### TRANSACTION ENDPOINTS
+### ============================================
+
+### Create income transaction
+POST {{baseUrl}}/wallets/019c9088-045e-7021-841f-55f2f538044c/transactions
+Content-Type: {{contentType}}
+
+{
+  "type": "income",
+  "amount": 5000.50,
+  "description": "Monthly salary",
+  "date": "2026-02-24"
+}
+
+### Create expense transaction
+POST {{baseUrl}}/wallets/019c9088-045e-7021-841f-55f2f538044c/transactions
+Content-Type: {{contentType}}
+
+{
+  "type": "expense",
+  "amount": 250.75,
+  "description": "Office supplies",
+  "date": "2026-02-24"
+}
+
+### Get all transactions for a wallet
+GET {{baseUrl}}/wallets/019c9088-045e-7021-841f-55f2f538044c/transactions
+Content-Type: {{contentType}}
+
+### Get a specific transaction
+# /transactions/{transactionId}
+GET {{baseUrl}}/transactions/019c908e-7e03-738a-ba93-c2a709d85c2d
+Content-Type: {{contentType}}
