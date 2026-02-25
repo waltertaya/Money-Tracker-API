@@ -98,6 +98,11 @@ php artisan serve
 # composer dev
 ```
 
+After the server is running, open the API documentation at:
+- http://127.0.0.1:8000/docs
+
+All API routes are documented in the docs page.
+
 ### 5) Run tests
 ```bash
 php artisan test tests/Feature/UserTest.php tests/Feature/WalletTest.php tests/Feature/TransactionTest.php 
