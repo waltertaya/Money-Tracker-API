@@ -17,5 +17,9 @@ Build a backend-only Money tracker API that:
 - Architecture: RESTful API
 - Version Control: Git
 
+## Database ERD
+<img width="831" height="1122" alt="money_tracker erd" src="https://github.com/user-attachments/assets/3d078071-c07c-4e0b-bc5c-9fd41e6c3878" />
+
+
 ## Author
 - [walter](https://www.github.com/waltertaya)
