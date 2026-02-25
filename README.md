@@ -17,6 +17,44 @@ Build a backend-only Money tracker API that:
 - Architecture: RESTful API
 - Version Control: Git
 
+## Project Structure
+.
+├───app
+│   ├───Http
+│   │   └───Controllers
+│   │       └───Api
+│   ├───Models
+│   └───Providers
+├───bootstrap
+│   └───cache
+├───config
+├───database
+│   ├───factories
+│   ├───migrations
+│   └───seeders
+├───public
+│   └───build
+│       └───assets
+├───resources
+│   ├───css
+│   ├───js
+│   └───views
+├───routes
+├───storage
+│   ├───app
+│   │   ├───private
+│   │   └───public
+│   ├───framework
+│   │   ├───cache
+│   │   │   └───data
+│   │   ├───sessions
+│   │   ├───testing
+│   │   └───views
+│   └───logs
+└───tests
+    ├───Feature
+    └───Unit
+
 ## Database ERD
 <img width="831" height="1122" alt="money_tracker erd" src="https://github.com/user-attachments/assets/3d078071-c07c-4e0b-bc5c-9fd41e6c3878" />
 
