@@ -7,6 +7,10 @@ This project was developed as part of a backend technical assessment.
 Build a backend-only Money tracker API that:
 
 ## Tech stack
+- Laravel (PHP)
+- MySQL
+- RESTful architecture
+- Git
 
 ## Project Structure
 ```text
